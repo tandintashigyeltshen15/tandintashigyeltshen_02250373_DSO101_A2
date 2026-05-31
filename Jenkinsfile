@@ -14,14 +14,14 @@ pipeline {
         stage('Install') {
             steps {
                 dir('backend') {
-                    sh 'npm install'
+                    bat 'npm install'
                 }
             }
         }
         stage('Test') {
             steps {
                 dir('backend') {
-                    sh 'npm test'
+                    bat 'npm test'
                 }
             }
             post {
@@ -33,7 +33,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 dir('backend') {
-                    sh 'docker build -t tandintashigyeltshen/todo-backend-02250373:latest .'
+                    bat 'docker build -t tandintashigyeltshen/todo-backend-02250373:latest .'
                 }
             }
         }
