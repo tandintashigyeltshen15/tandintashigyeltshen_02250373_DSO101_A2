@@ -1,0 +1,492 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap');
+
+:root {
+  --red: #ff4f4f;
+  --orange: #ff9800;
+  --yellow: #ffd600;
+  --green: #00c875;
+  --blue: #579bfc;
+  --purple: #a25ddc;
+  --pink: #ff5ac4;
+  --bg: #f5f6fa;
+  --white: #ffffff;
+  --text: #1a1a2e;
+  --muted: #9499a7;
+  --border: #e8eaf0;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-hover: 0 8px 30px rgba(0,0,0,0.14);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.header {
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--blue);
+  display: inline-block;
+}
+
+.stats-pill {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.stats-pill span {
+  color: var(--green);
+}
+
+/* ── Main layout ── */
+.main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* ── Add task card ── */
+.add-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 28px;
+  border: 2px solid transparent;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.add-card:focus-within {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(87,155,252,0.12);
+}
+
+.add-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.add-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+}
+
+.add-input::placeholder { color: var(--muted); font-weight: 400; }
+
+.desc-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.875rem;
+  color: var(--muted);
+  background: transparent;
+  resize: none;
+  height: 36px;
+  border-top: 1.5px solid var(--border);
+  padding-top: 10px;
+}
+
+.desc-input::placeholder { color: #c5c8d4; }
+
+.add-btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.add-btn:hover { background: #3d87f5; transform: translateY(-1px); }
+.add-btn:active { transform: translateY(0); }
+.add-btn:disabled { background: var(--border); color: var(--muted); cursor: default; transform: none; }
+
+/* ── Color picker ── */
+.color-picker {
+  display: flex;
+  gap: 6px;
+  padding-top: 2px;
+}
+
+.color-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2.5px solid transparent;
+  transition: transform 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.color-dot:hover { transform: scale(1.2); }
+.color-dot.selected { border-color: var(--text); transform: scale(1.15); }
+
+/* ── Filters ── */
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  background: var(--white);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.filter-btn:hover { border-color: var(--blue); color: var(--blue); }
+.filter-btn.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: white;
+}
+
+.filter-count {
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+  padding: 1px 6px;
+  font-size: 0.7rem;
+  margin-left: 4px;
+}
+
+.filter-btn:not(.active) .filter-count {
+  background: var(--bg);
+  color: var(--muted);
+}
+
+/* ── Section label ── */
+.section-label {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+/* ── Todo list ── */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Todo item ── */
+.todo-item {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: box-shadow 0.2s, transform 0.2s, opacity 0.2s;
+  border-left: 4px solid var(--border);
+  animation: slideIn 0.25s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.todo-item:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.todo-item.completed {
+  opacity: 0.55;
+}
+
+/* dynamic border colors via data-color */
+.todo-item[data-color="red"]    { border-left-color: var(--red); }
+.todo-item[data-color="orange"] { border-left-color: var(--orange); }
+.todo-item[data-color="yellow"] { border-left-color: var(--yellow); }
+.todo-item[data-color="green"]  { border-left-color: var(--green); }
+.todo-item[data-color="blue"]   { border-left-color: var(--blue); }
+.todo-item[data-color="purple"] { border-left-color: var(--purple); }
+.todo-item[data-color="pink"]   { border-left-color: var(--pink); }
+
+/* ── Checkbox ── */
+.checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2.5px solid var(--border);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  background: transparent;
+}
+
+.checkbox:hover { border-color: var(--green); }
+.checkbox.checked { background: var(--green); border-color: var(--green); }
+.checkbox.checked::after {
+  content: '';
+  width: 6px;
+  height: 10px;
+  border: 2px solid white;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) translateY(-1px);
+}
+
+/* ── Todo content ── */
+.todo-content { flex: 1; min-width: 0; }
+
+.todo-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.todo-item.completed .todo-title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.todo-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+.todo-meta {
+  font-size: 0.72rem;
+  color: #c5c8d4;
+  margin-top: 6px;
+}
+
+/* ── Edit mode ── */
+.edit-input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid var(--blue);
+  outline: none;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: transparent;
+  padding-bottom: 2px;
+  margin-bottom: 6px;
+}
+
+.edit-desc-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid var(--border);
+  outline: none;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: transparent;
+  padding-bottom: 2px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn-save {
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 14px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: var(--bg);
+  color: var(--muted);
+  border: none;
+  border-radius: 8px;
+  padding: 5px 14px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+/* ── Item actions ── */
+.item-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+
+.todo-item:hover .item-actions { opacity: 1; }
+
+.icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: background 0.15s;
+  color: var(--muted);
+}
+
+.icon-btn:hover { background: var(--bg); color: var(--text); }
+.icon-btn.delete:hover { background: #ffeaea; color: var(--red); }
+
+/* ── Empty state ── */
+.empty {
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--muted);
+}
+
+.empty-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.empty-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.empty-sub {
+  font-size: 0.875rem;
+}
+
+/* ── Error banner ── */
+.error-banner {
+  background: #fff0f0;
+  border: 1.5px solid #ffd0d0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--red);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Loading ── */
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Completed section ── */
+.completed-section { margin-top: 32px; }
+
+.completed-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+
+.completed-toggle:hover { color: var(--text); }
